@@ -16,29 +16,28 @@ function onClick() {
 
         <v-btn
           :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
-          text="Toggle Theme"
           slim
           @click="onClick"
         ></v-btn>
       </v-app-bar>
 
       <v-main>
-        <v-container>
+        <v-container class="mt-3">
           <v-row>
-            <v-col cols="12" md="6" class="mx-auto">
-              <v-card class="mx-auto" prepend-icon="mdi-account" subtitle="Login">
+            <v-col cols="12" md="6" class="form1 mx-auto">
+              <v-card class="mx-auto text-center pt-5">
                 <template v-slot:title>
-                  <span class="font-weight-black">StayMate</span>
+                  <v-img src="/staymate.png" contain height="100" alt="App Logo"></v-img>
                 </template>
 
-                <v-card text class="bg-surface-light px-4 py-4">
+                <v-card text class="px-4 py-2" height="400px">
                   <v-form fast-fail @submit.prevent>
                     <v-text-field label="Email" variant="outlined"></v-text-field>
 
                     <v-text-field label="Password" type="password" variant="outlined"></v-text-field>
 
                     <v-btn rounded block type="submit">LOGIN</v-btn>
-                    <p class="font-weight-thin pt-5 text-center">Don't have an account? <a href="#" class="text-decoration-none">Register</a></p>
+                    <p class="font-weight-thin pt-5 text-center">Don't have an account? <a href="#" class="text-decoration-none bg-color3">Register</a></p>
 
                   </v-form>
                 </v-card>
