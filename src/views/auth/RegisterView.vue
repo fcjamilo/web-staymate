@@ -9,7 +9,7 @@ function onClick() {
 </script>
 
 <template>
-  <v-responsive class="border rounded">
+    <v-responsive class="border rounded">
     <v-app :theme="theme">
       <v-app-bar class="px-3">
         <v-spacer></v-spacer>
@@ -32,14 +32,18 @@ function onClick() {
 
                 <v-card text class="px-4 py-2" height="500px">
                   <v-form fast-fail @submit.prevent>
+                    <v-text-field label="Name" variant="outlined"></v-text-field>
+
                     <v-text-field label="Email" variant="outlined"></v-text-field>
 
                     <v-text-field label="Password" type="password" variant="outlined"></v-text-field>
 
-                    <v-btn rounded block type="submit" prepend-icon="mdi-login"><b>LOGIN</b></v-btn>
+                    <v-text-field label="Password Confirmation" type="password" variant="outlined"></v-text-field>
+
+                    <v-btn rounded block type="submit" prepend-icon="mdi-pencil-box-outline"><b>SIGNUP</b></v-btn>
 
                     <v-divider class="my-5"></v-divider>
-                    <h5>Don't have an account? <RouterLink class="bg-color3" to="/register">Register here.</RouterLink></h5>
+                    <h5>Already have an account? <RouterLink class="bg-color3" to="/">Login here.</RouterLink></h5>
 
                   </v-form>
                 </v-card>
