@@ -34,7 +34,7 @@ function onClick() {
                     <v-btn color="#dc4e1d" rounded block type="submit" prepend-icon="mdi-pencil-box-outline"><b>SIGNUP</b></v-btn>
 
                     <v-divider class="my-5"></v-divider>
-                    <h5>Already have an account? <RouterLink class="bg-color3" to="/">Login here.</RouterLink></h5>
+                    <h5>Already have an account? <RouterLink class="bg-color3" to="/">Login here</RouterLink></h5>
 
                   </v-form>
                 </v-card>

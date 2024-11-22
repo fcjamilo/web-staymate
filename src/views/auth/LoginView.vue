@@ -35,7 +35,7 @@ function onClick() {
                     <v-divider class="my-5"></v-divider>
                     <h5>
                       Don't have an account?
-                      <RouterLink class="bg-color3" to="/register">Register here.</RouterLink>
+                      <RouterLink class="bg-color3" to="/register">Register here</RouterLink>
                     </h5>
                   </v-form>
                 </v-card>
