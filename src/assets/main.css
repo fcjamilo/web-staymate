@@ -16,6 +16,12 @@
 }
 
 .background-image {
-  background-image: url(/public/background.png);
+  background-image: url(/background.png);
   background-size: cover;
+}
+
+.loginitems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

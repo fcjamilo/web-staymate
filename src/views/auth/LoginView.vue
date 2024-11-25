@@ -1,21 +1,13 @@
-<script setup>
-import { ref } from 'vue'
-
-const theme = ref('light')
-
-function onClick() {
-  theme.value = theme.value === 'light' ? 'dark' : 'light'
-}
-</script>
-
 <template>
   <v-responsive>
-    <v-app :theme="theme">
-
+    <v-app>
       <v-main class="background-image">
-        <v-container class="logincon mt-5">
-          <v-row>
-            <v-col cols="12" md="6" class="form1 mx-auto">
+        <v-container class="mt-5">
+          <v-row class="loginitems">
+            <v-col cols="12" md="6" class="mr-5">
+              <v-img src="/headerpict2.png" alt="" contain max-height="550px"></v-img>
+            </v-col>
+            <v-col cols="12" md="5" class="form1 mx-auto">
               <v-card class="mx-auto text-center pt-5">
                 <template v-slot:title>
                   <v-img src="/staymate.png" contain height="100" alt="App Logo"></v-img>
@@ -44,6 +36,9 @@ function onClick() {
           </v-row>
         </v-container>
       </v-main>
+      <v-footer style="background-color: white ; color: black; text-align:center; padding: 0%;"> 
+        <v-col class="text-center p0"> <span>Copyright © 2024 - StayMate | All Rights Reserved</span> </v-col> 
+      </v-footer>
     </v-app>
   </v-responsive>
 </template>
