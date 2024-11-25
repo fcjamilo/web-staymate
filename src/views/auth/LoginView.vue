@@ -12,7 +12,7 @@
                 <template v-slot:title>
                   <v-img src="/staymate.png" contain height="100" alt="App Logo"></v-img>
                 </template>
-                <v-card text class="px-4 py-2" height="500px">
+                <v-card class="px-4 py-2" height="500px">
                   <v-form fast-fail @submit.prevent>
                     <v-text-field label="Email" variant="outlined"></v-text-field>
 
