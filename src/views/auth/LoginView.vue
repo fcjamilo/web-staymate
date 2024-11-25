@@ -12,8 +12,8 @@ function onClick() {
   <v-responsive>
     <v-app :theme="theme">
 
-      <v-main>
-        <v-container class="mt-5">
+      <v-main class="background-image">
+        <v-container class="logincon mt-5">
           <v-row>
             <v-col cols="12" md="6" class="form1 mx-auto">
               <v-card class="mx-auto text-center pt-5">

@@ -12,7 +12,7 @@ function onClick() {
     <v-responsive>
     <v-app :theme="theme">
 
-      <v-main>
+      <v-main class="background-image">
         <v-container class="mt-5">
           <v-row>
             <v-col cols="12" md="6" class="form1 mx-auto">
