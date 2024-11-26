@@ -5,10 +5,10 @@
       <v-main class="background-image">
         <v-container class="mt-5">
           <v-row class="loginitems">
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="6" class="mr-6">
               <v-img src="/headerpict2.png" alt="" contain max-height="550px"></v-img>
             </v-col>
-            <v-col cols="12" md="6" class="form1 mx-auto ml-0">
+            <v-col cols="12" md="4" class="form1 mx-auto">
               <v-card class="mx-auto text-center pt-5">
                 <template v-slot:title>
                   <v-img src="/staymate.png" contain height="100" alt="App Logo"></v-img>
