@@ -36,9 +36,7 @@
           </v-row>
         </v-container>
       </v-main>
-      <v-footer style="background-color: white ; color: black; text-align:center; padding: 0%;"> 
-        <v-col class="text-center p0"> <span>Copyright © 2024 - StayMate | All Rights Reserved</span> </v-col> 
-      </v-footer>
+      <v-footer color="transparent" app>Copyright © 2024 - StayMate | All Rights Reserved</v-footer>
     </v-app>
   </v-responsive>
 </template>
