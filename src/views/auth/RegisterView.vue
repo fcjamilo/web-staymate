@@ -13,8 +13,7 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
     ...formDataDefault
   })
 
-  const isPasswordVisible = ref(false)
-  const isPasswordConfirmVisible = (false)
+  const visible = ref(false)
   const revVForm = ref()
 
   const onSubmit = () => {
