@@ -1,8 +1,34 @@
 <script setup>
+import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/validators';
   import { ref } from 'vue'
 
-  const visible = ref(false)
+  const formDataDefault = {
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
+  }
+
+  const formData = ref ({
+    ...formDataDefault
+  })
+
+  const isPasswordVisible = ref(false)
+  const isPasswordConfirmVisible = (false)
+  const revVForm = ref()
+
+  const onSubmit = () => {
+    alert(formData.value.email)
+  }
+
+  const onFormSubmit = () => {
+    refVForm.value?.validate().then(({ valid }) => {
+      if (valid) 
+      onSubmit()
+    })
+  }
 </script>
+
 <template>
     <v-responsive>
     <v-app>
@@ -19,25 +45,30 @@
                 </template>
 
                 <v-card class="px-4 py-2" height="440px">
-                  <v-form fast-fail @submit.prevent>
+                  <v-form ref="refVForm" @submit.prevent="onFormSubmit">
                     <v-col>
                       <v-text-field 
+                    v-model ="formData.name"
                     label="Name" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
                     prepend-inner-icon="mdi-card-account-details-outline"
                     density="compact"
+                    :rules="[requiredValidator]"
                     ></v-text-field>
 
                     <v-text-field 
+                    v-model="formData.email"
                     label="Email" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
                     prepend-inner-icon="mdi-email-outline"
                     density="compact"
+                    :rules="[requiredValidator, emailValidator]"
                     ></v-text-field>
 
                     <v-text-field
+                    v-model="formData.password"
                     :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                     :type="visible ? 'text' : 'password'"
                     density="compact" 
@@ -47,9 +78,11 @@
                     style="font-size: 1.25rem;"
                     @click:append-inner="visible = !visible"
                     prepend-inner-icon="mdi-lock-outline"
+                    :rules="[requiredValidator, passwordValidator]"
                     ></v-text-field>
 
                     <v-text-field
+                    v-model="formData.password_confirmation"
                     :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                     :type="visible ? 'text' : 'password'"
                     density="compact" 
@@ -59,9 +92,10 @@
                     style="font-size: 1.25rem;"
                     @click:append-inner="visible = !visible"
                     prepend-inner-icon="mdi-lock-outline"
+                    :rules="[requiredValidator, confirmedValidator(formData.password_confirmation, formData.password)]"
                     ></v-text-field>
 
-                    <v-btn color="#dc4e1d" rounded block type="submit" prepend-icon="mdi-pencil-box-outline"><b>SIGNUP</b></v-btn>
+                    <v-btn class="mt-2" color="#dc4e1d" rounded block type="submit" prepend-icon="mdi-pencil-box-outline"><b>SIGNUP</b></v-btn>
                     </v-col>
 
                     <v-divider class="my-5"></v-divider>

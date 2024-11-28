@@ -1,7 +1,31 @@
 <script setup>
+ import { emailValidator, requiredValidator } from '@/utils/validators';
   import { ref } from 'vue'
 
   const visible = ref(false)
+  const refVForm = ref()
+
+  const formDataDefault = {
+    email: '',
+    password: '',
+  }
+
+  const formData = ref({
+    ...formDataDefault
+  })
+
+  const onLogin = () => {
+    alert(formData.value.email)
+  }
+
+  const onFormSubmit = () => {
+    refVForm.value?.validate().then(({ valid }) => {
+      if (valid) 
+      onLogin()
+    })
+  }
+
+
 </script>
 <template>
   <v-responsive>
@@ -18,29 +42,34 @@
                   <v-img src="/staymate.png" contain height="100" alt="App Logo"></v-img>
                 </template>
                 <v-card class="px-4 py-2" height="430px">
-                  <v-form fast-fail @submit.prevent>
+                  <v-form ref="refVForm" @submit.prevent="onFormSubmit">
                     <v-col>
                       <v-text-field
-                    density="compact"
+                    v-model="formData.email"
                     prepend-inner-icon="mdi-email-outline" 
+                    density="compact"
                     label="Email" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
+                    :rules="[requiredValidator, emailValidator]"
                     ></v-text-field>
 
                     <v-text-field
+                    v-model="formData.password"
                     :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                     :type="visible ? 'text' : 'password'"
-                    density="compact"
                     prepend-inner-icon="mdi-lock-outline"
+                    density="compact"
                     label="Password"
                     type="password"
                     variant="outlined"
                     style="font-size: 1.25rem;"
                     @click:append-inner="visible = !visible"
+                    :rules="[requiredValidator]"
                     ></v-text-field>
 
-                    <v-btn 
+                    <v-btn
+                    class="mt-2" 
                     color="#dc4e1d" 
                     rounded block type="submit" 
                     prepend-icon="mdi-login"
