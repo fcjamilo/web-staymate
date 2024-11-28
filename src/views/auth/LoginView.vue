@@ -1,3 +1,8 @@
+<script setup>
+  import { ref } from 'vue'
+
+  const visible = ref(false)
+</script>
 <template>
   <v-responsive>
     <v-app>
@@ -14,17 +19,25 @@
                 </template>
                 <v-card class="px-4 py-2" height="430px">
                   <v-form fast-fail @submit.prevent>
-                    <v-text-field 
+                    <v-col>
+                      <v-text-field
+                    density="compact"
+                    prepend-inner-icon="mdi-email-outline" 
                     label="Email" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
                     ></v-text-field>
 
                     <v-text-field
-                      label="Password"
-                      type="password"
-                      variant="outlined"
-                      style="font-size: 1.25rem;"
+                    :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                    :type="visible ? 'text' : 'password'"
+                    density="compact"
+                    prepend-inner-icon="mdi-lock-outline"
+                    label="Password"
+                    type="password"
+                    variant="outlined"
+                    style="font-size: 1.25rem;"
+                    @click:append-inner="visible = !visible"
                     ></v-text-field>
 
                     <v-btn 
@@ -33,7 +46,8 @@
                     prepend-icon="mdi-login"
                       ><b>LOGIN</b></v-btn
                     >
-
+                    </v-col>
+                  
                     <v-divider class="my-5"></v-divider>
                     <h5>
                       Don't have an account?

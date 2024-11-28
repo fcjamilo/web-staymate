@@ -1,3 +1,8 @@
+<script setup>
+  import { ref } from 'vue'
+
+  const visible = ref(false)
+</script>
 <template>
     <v-responsive>
     <v-app>
@@ -15,33 +20,49 @@
 
                 <v-card class="px-4 py-2" height="440px">
                   <v-form fast-fail @submit.prevent>
-                    <v-text-field 
+                    <v-col>
+                      <v-text-field 
                     label="Name" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
+                    prepend-inner-icon="mdi-card-account-details-outline"
+                    density="compact"
                     ></v-text-field>
 
                     <v-text-field 
                     label="Email" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
+                    prepend-inner-icon="mdi-email-outline"
+                    density="compact"
                     ></v-text-field>
 
-                    <v-text-field 
+                    <v-text-field
+                    :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                    :type="visible ? 'text' : 'password'"
+                    density="compact" 
                     label="Password" 
                     type="password" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
+                    @click:append-inner="visible = !visible"
+                    prepend-inner-icon="mdi-lock-outline"
                     ></v-text-field>
 
-                    <v-text-field 
+                    <v-text-field
+                    :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                    :type="visible ? 'text' : 'password'"
+                    density="compact" 
                     label="Password Confirmation" 
                     type="password" 
                     variant="outlined"
                     style="font-size: 1.25rem;"
+                    @click:append-inner="visible = !visible"
+                    prepend-inner-icon="mdi-lock-outline"
                     ></v-text-field>
 
                     <v-btn color="#dc4e1d" rounded block type="submit" prepend-icon="mdi-pencil-box-outline"><b>SIGNUP</b></v-btn>
+                    </v-col>
 
                     <v-divider class="my-5"></v-divider>
                     <h5>Already have an account? <RouterLink class="bg-color3" to="/">Login here</RouterLink></h5>
