@@ -33,8 +33,8 @@
       <v-main class="gradient">
         <v-container class="mt-5">
           <v-row class="loginitems">
-            <v-col cols="12" md="6" class="mr-6">
-              <v-img src="/headerpict2.png" alt="" contain max-height="550px"></v-img>
+            <v-col cols="12" md="6">
+              <v-img src="/hello-unscreen.gif" alt="" contain max-height="550px"></v-img>
             </v-col>
             <v-col cols="12" md="4" class="form1 mx-auto">
               <v-card class="mx-auto text-center pt-5">
@@ -81,7 +81,7 @@
                     <h5>
                       Don't have an account?
                       <RouterLink class="bg-color3" to="/register">Register here</RouterLink>
-                      <RouterLink to="/home"> try </RouterLink>
+                      <RouterLink to="/"> try </RouterLink>
                     </h5>
                   </v-form>
                 </v-card>
@@ -96,3 +96,6 @@
     </v-app>
   </v-responsive>
 </template>
+<script> 
+export default { name: 'login' } 
+</script>

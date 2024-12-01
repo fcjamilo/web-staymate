@@ -1,3 +1,9 @@
+<script setup>
+import { ref } from 'vue'
+
+const length = ref(3)
+const onboarding = ref(0)
+</script>
 <template>
   <v-app>
     <v-container>
@@ -29,34 +35,87 @@
           </div>
         </v-col>
       </v-row>
-      <!-- Made to Measure Section -->
-      <v-row class="text-center py-12">
-        <v-col>
-          <h2>TESTING</h2>
-          <p>testing abcdedfgsgs</p>
-          <v-btn color="primary" class="mt-4">SEE THE SUITS</v-btn>
-        </v-col>
+      <v-row class="text-center">
+        <h1 class="py-5 px-5">Top Values for you</h1>
       </v-row>
-
+      <!-- Made to Measure Section -->
+      <v-window v-model="onboarding" direction="vertical" show-arrows>
+        <v-window-item v-for="n in length" :key="`card-${n}`">
+          <v-card class="d-flex align-center justify-center ma-2" height="200">
+            <img src="/background.png" alt="" />
+            <h1 class="text-h2">Slide {{ n }}</h1>
+          </v-card>
+        </v-window-item>
+      </v-window>
       <!-- Icons Section -->
-      <div class="d-flex align-center justify-space-around gradient pb-5">
-        <v-avatar cols="4" color="info">
-          <v-icon icon="mdi-account-circle"></v-icon>
-        </v-avatar>
-
-        <v-avatar cols="4">
-          <v-img alt="John" src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
-        </v-avatar>
-
-        <v-avatar cols="4" color="red">
-          <span class="text-h5">CJ</span>
-        </v-avatar>
+       <v-row>
+        <v-col cols="12" md="4">
+      <v-card
+      prepend-avatar="/background.png"
+        subtitle="System Analyst"
+        title="Jherto Lagdamen"
+      >
+      <v-divider></v-divider>
+      <div class="d-flex">
+        <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-github" size="small" color="dark"></v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-facebook" size="small" color="dark"></v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-web" size="small" color="dark"></v-btn>
+      </v-col>
       </div>
+    </v-card>
+    </v-col>
+    <v-col cols="12" md="4">
+      <v-card
+      prepend-avatar="/francine.jpg"
+        subtitle="Lead Developer"
+        title="Francine Claire Jamilo"
+      >
+      <v-divider></v-divider>
+      <div class="d-flex">
+        <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-github" size="small" color="dark" href="https://github.com/fcjamilo" target="_blank"></v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-facebook" size="small" color="dark" href="https://www.facebook.com/francine.jamilo.5" target="_blank"></v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-web" size="small" color="dark" href="https://fcjamilo.github.io/" target="_blank"></v-btn>
+      </v-col>
+      </div>
+    </v-card>
+    </v-col>
+    <v-col cols="12" md="4">
+      <v-card
+      prepend-avatar="/background.png"
+        subtitle="Frontend Developer"
+        title="Eloisa Vasquez"
+      >
+      <v-divider></v-divider>
+      <div class="d-flex">
+        <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-github" size="small" color="dark"></v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-facebook" size="small" color="dark"></v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-web" size="small" color="dark"></v-btn>
+      </v-col>
+      </div>
+    </v-card>
+    </v-col>
+    
+       </v-row>
     </v-container>
   </v-app>
 </template>
 <script>
 export default {
-  name: 'landing',
+  name: 'home',
 }
 </script>
