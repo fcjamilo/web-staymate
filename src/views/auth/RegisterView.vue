@@ -31,7 +31,7 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
 <template>
     <v-responsive>
     <v-app>
-      <v-main class="background-image">
+      <v-main class="gradient">
         <v-container class="mt-5">
           <v-row class="loginitems">
             <v-col cols="12" md="6" class="mr-6">

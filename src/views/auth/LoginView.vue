@@ -30,7 +30,7 @@
 <template>
   <v-responsive>
     <v-app>
-      <v-main class="background-image">
+      <v-main class="gradient">
         <v-container class="mt-5">
           <v-row class="loginitems">
             <v-col cols="12" md="6" class="mr-6">
@@ -81,6 +81,7 @@
                     <h5>
                       Don't have an account?
                       <RouterLink class="bg-color3" to="/register">Register here</RouterLink>
+                      <RouterLink to="/home"> try </RouterLink>
                     </h5>
                   </v-form>
                 </v-card>

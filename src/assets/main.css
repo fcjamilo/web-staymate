@@ -10,18 +10,21 @@
   color: #dc4e1d;
 }
 
+.gradient {
+  background: linear-gradient(to bottom, #fffbfe, #3a7871);
+}
+
 .form1 {
   border-radius: 10px;
   box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.5);
-}
-
-.background-image {
-  background-image: url(/background.png);
-  background-size: cover;
 }
 
 .loginitems {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.flexible-img { 
+  width: 100%; height: auto; 
 }
