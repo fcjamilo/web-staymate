@@ -18,6 +18,13 @@
   background: linear-gradient(to bottom, #3a7871, #fffbfe);
 }
 
+.gradient-radial {
+  background: radial-gradient(circle, #3a7871, #fffbfe); /* A circular transition from orange to light orange */
+  height: 100px;
+  width: 100%;
+}
+
+
 .form1 {
   border-radius: 10px;
   box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.5);

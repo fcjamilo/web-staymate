@@ -90,7 +90,7 @@
           </v-row>
         </v-container>
       </v-main>
-      <v-footer color="grey-lighten-2" app
+      <v-footer color="grey-lighten-2" app height="60px"
         ><v-col class="text-center"><h6>Copyright © 2024 - StayMate | All Rights Reserved</h6></v-col></v-footer
       >
     </v-app>
