@@ -81,7 +81,6 @@
                     <h5>
                       Don't have an account?
                       <RouterLink class="bg-color3" to="/register">Register here</RouterLink>
-                      <RouterLink to="/"> try </RouterLink>
                     </h5>
                   </v-form>
                 </v-card>
