@@ -35,7 +35,7 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
         <v-container class="mt-5">
           <v-row class="loginitems">
             <v-col cols="12" md="6">
-              <v-img src="/hello-unscreen.gif" alt="" contain max-height="550px"></v-img>
+              <v-img src="/hello-unscreen.gif" alt="" contain max-height="550px" class="floating"></v-img>
             </v-col>
             <v-col cols="12" md="4" class="form1 mx-auto">
               <v-card class="mx-auto text-center pt-5">
