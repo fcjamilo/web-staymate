@@ -51,9 +51,9 @@ const onboarding = ref(0)
             <h5 class="text-justify font-weight-thin px-10">Enjoy the convenience of finding the perfect place that fits your desired amenities, preferred distance, and budget.</h5>
           </v-col>
           <v-col cols="12" md="4" class="d-flex flex-column align-center">
-            <v-icon color="#dc4e1d" size="35">mdi-check-outline</v-icon>
-            <span class="text-center"><strong>MATCH</strong></span> <v-spacer></v-spacer>
-            <h5 class="text-justify font-weight-thin px-10">Discover accommodations that match your needs, offering a seamless experience tailored just for you.</h5>
+            <v-icon color="#dc4e1d" size="35">mdi-star-outline</v-icon>
+            <span class="text-center"><strong>ADD FAVORITES</strong></span> <v-spacer></v-spacer>
+            <h5 class="text-justify font-weight-thin px-10">Add favorite accommodations that match your needs, offering a seamless experience tailored just for you.</h5>
           </v-col>
         </v-row>
       </v-container>
