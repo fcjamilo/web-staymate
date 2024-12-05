@@ -3,6 +3,9 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
   import { ref } from 'vue'
   import AlertNotification from '@/components/common/AlertNotification.vue';
   import { supabase, formActionDefault } from '@/utils/supabase.js'
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter()
 
 
   const formDataDefault = {
@@ -35,6 +38,7 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
     options: {
       data: {
         name: formData.value.name,
+        is_admin: false
       }
     }
   }
@@ -49,6 +53,7 @@ else if(data) {
   console.log(data)
   formAction.value.formSuccessMessage = 'Successfully Registered Account.'
   refVForm.value?.reset()
+  router.replace('/dashboard')
 }
 
 formAction.value.formProcess = false
