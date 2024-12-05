@@ -1,6 +1,9 @@
 <script setup>
 import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/validators';
   import { ref } from 'vue'
+  import AlertNotification from '@/components/common/AlertNotification.vue';
+  import { supabase, formActionDefault } from '@/utils/supabase.js'
+
 
   const formDataDefault = {
     name: '',
@@ -13,11 +16,43 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
     ...formDataDefault
   })
 
-  const visible = ref(false)
-  const revVForm = ref()
+  const formAction = ref ({
+    ...formActionDefault
+  })
 
-  const onSubmit = () => {
-    alert(formData.value.email)
+  const visible = ref(false)
+  const refVForm = ref()
+
+  const onSubmit = async () => {
+
+    formAction.value = { ...formActionDefault}
+    formAction.value.formProcess = true
+
+    const { data, error } = await supabase.auth.signUp(
+  {
+    email: formData.value.email,
+    password: formData.value.password,
+    options: {
+      data: {
+        name: formData.value.name,
+      }
+    }
+  }
+)
+
+if(error) {
+  console.log(error)
+  formAction.value.formErrorMessage = error.message
+  formAction.value.formStatus = error.status
+}
+else if(data) {
+  console.log(data)
+  formAction.value.formSuccessMessage = 'Successfully Registered Account.'
+  refVForm.value?.reset()
+}
+
+formAction.value.formProcess = false
+
   }
 
   const onFormSubmit = () => {
@@ -42,6 +77,11 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
                 <template v-slot:title>
                   <v-img src="/staymate.png" contain height="100" alt="App Logo"></v-img>
                 </template>
+
+                <AlertNotification 
+                :form-success-message="formAction.formSuccessMessage" 
+                :form-error-message="formAction.formErrorMessage"
+                ></AlertNotification>
 
                 <v-card class="px-4 py-2" height="440px">
                   <v-form ref="refVForm" @submit.prevent="onFormSubmit">
@@ -94,7 +134,14 @@ import { confirmedValidator, emailValidator, requiredValidator } from '@/utils/v
                     :rules="[requiredValidator, confirmedValidator(formData.password_confirmation, formData.password)]"
                     ></v-text-field>
 
-                    <v-btn class="mt-2" color="#dc4e1d" rounded block type="submit" prepend-icon="mdi-pencil-box-outline"><b>SIGNUP</b></v-btn>
+                    <v-btn 
+                    class="mt-2" 
+                    color="#dc4e1d" 
+                    rounded block type="submit" 
+                    prepend-icon="mdi-pencil-box-outline"
+                    :disabled="formAction.formProcess"
+                    :loading="formAction.formProcess"
+                    ><b>SIGNUP</b></v-btn>
                     </v-col>
 
                     <v-divider class="my-5"></v-divider>
