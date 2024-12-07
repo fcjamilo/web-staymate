@@ -2,11 +2,17 @@
 import { supabase, formActionDefault } from '@/utils/supabase'
 import { getAvatarText } from '@/utils/helpers'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAuthUserStore } from '@/stores/authUser'
 
 // Utilize pre-defined vue functions
 const router = useRouter()
+
+const userData = ref({
+    initials: '',
+    email:'',
+    fullname: ''
+})
 
 // Use Pinia Store
 const authStore = useAuthUserStore()
@@ -37,25 +43,29 @@ const onLogout = async () => {
   router.replace('/login')
 }
 
+const getUser = async () => {
+    const {
+        data: {
+            user: { user_metadata: metadata }
+        }
+    } = await supabase.auth.getUser()
 
+    userData.value.email = metadata.email
+    userData.value.fullname = metadata.firstname + ' ' + metadata.lastname
+    userData.value.initials = getAvatarText(userData.value.fullname)
+}
+
+onMounted(() => {
+    getUser()
+})
 </script>
 
 <template>
   <v-menu min-width="150px" rounded>
     <template #activator="{ props }">
       <v-btn icon v-bind="props">
-        <v-avatar
-          v-if="authStore.userData && authStore.userData.image_url"
-          :image="authStore.userData.image_url"
-          color="orange-lighten-3"
-          size="small"
-        >
-        </v-avatar>
-
-        <v-avatar v-else color="orange-lighten-3" size="large">
-          <span class="text-h5">
-            {{ getAvatarText(authStore.userData ? authStore.userData.firstname + ' ' + authStore.userData.lastname : '') }}
-          </span>
+        <v-avatar color="deep-orange-lighten-1" size="large">
+            <span class="text-h5">{{ userData.initials }} </span>
         </v-avatar>
       </v-btn>
     </template>
@@ -63,25 +73,10 @@ const onLogout = async () => {
     <v-card class="mt-1">
       <v-card-text>
         <v-list>
-          <v-list-item
-            :subtitle="authStore.userData ? authStore.userData.email : ''"
-            :title="authStore.userData ? authStore.userData.firstname + ' ' + authStore.userData.lastname : ''"
-          >
-            <template #prepend>
-                <v-avatar
-                v-if="authStore.userData && authStore.userData.image_url"
-                :image="authStore.userData.image_url"
-                color="orange-lighten-3"
-                size="large"
-              >
-              </v-avatar>
-
-              <v-avatar v-else color="orange-lighten-3" size="large">
-                <span class="text-h5">
-                  {{ getAvatarText(authStore.userData ? authStore.userData.firstname + ' ' + authStore.userData.lastname : '') }}
-                </span>
-              </v-avatar>
-            </template>
+          <v-list-item :subtitle="userData.email" :title="userData.fullname">
+            <v-avatar color="deep-orange-lighten-1" size="large">
+                <span class="text-h5">{{ userData.initials }}</span>
+            </v-avatar>
           </v-list-item>
         </v-list>
 

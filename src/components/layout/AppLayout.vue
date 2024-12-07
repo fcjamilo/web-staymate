@@ -1,6 +1,6 @@
 <script setup>
 import { isAuthenticated } from '@/utils/supabase'
-import ProfileHeaderNavigation from '@/components/layout/ProfileHeaderNavigation.vue'
+import ProfileHeaderNavigation from './ProfileHeaderNavigation.vue'
 import { useAuthUserStore } from '@/stores/authUser'
 import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
@@ -18,7 +18,6 @@ const authStore = useAuthUserStore()
 
 // Load Variables
 const isLoggedIn = ref(false)
-const theme = ref(localStorage.getItem('theme') ?? 'light')
 
 //  Toggle Theme
 const onToggleTheme = () => {

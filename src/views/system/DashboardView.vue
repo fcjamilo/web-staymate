@@ -1,20 +1,16 @@
-<template>
-  <v-app>
-    <AppLayout/>
-    <v-container>
-      <!-- Dashboard content -->
-    </v-container>
-  </v-app>
-</template>
-
-<script>
+<script setup>
 import AppLayout from '@/components/layout/AppLayout.vue';
+import { ref } from 'vue'
 
-export default {
-  name: 'dashboard',
-  components: {
-    AppLayout
-  }
-};
 </script>
+
+<template>
+  <AppLayout>
+  <template #content>
+    <v-container>
+dgdhh
+    </v-container>
+  </template>
+  </AppLayout>
+</template>
 
