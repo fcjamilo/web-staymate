@@ -1,19 +1,20 @@
 <template>
   <v-app>
-    <NavbarComponent />
+    <AppLayout/>
     <v-container>
-      <!-- Empty content area -->
+      <!-- Dashboard content -->
     </v-container>
   </v-app>
 </template>
 
 <script>
-import NavbarComponent from '@/components/layout/NavBarComponent.vue';
+import AppLayout from '@/components/layout/AppLayout.vue';
 
 export default {
-  name: 'DashboardComponent',
+  name: 'dashboard',
   components: {
-    NavbarComponent
+    AppLayout
   }
 };
 </script>
+
