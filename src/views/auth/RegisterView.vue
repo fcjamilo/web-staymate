@@ -90,7 +90,7 @@ const onFormSubmit = () => {
                 <v-card class="px-4 py-2" height="440px">
                   <v-form ref="refVForm" @submit.prevent="onFormSubmit">
                     <v-row dense>
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" class="pb-0 pt-3">
         <v-text-field
         density="compact"
                     variant="outlined"
@@ -101,7 +101,7 @@ const onFormSubmit = () => {
         ></v-text-field>
       </v-col>
 
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" class="pb-0 pt-3">
         <v-text-field
         density="compact"
                     variant="outlined"
@@ -112,7 +112,7 @@ const onFormSubmit = () => {
         ></v-text-field>
       </v-col>
 
-      <v-col cols="12">
+      <v-col cols="12" class="py-0">
         <v-text-field
         density="compact"
                     variant="outlined"
@@ -124,7 +124,7 @@ const onFormSubmit = () => {
         ></v-text-field>
       </v-col>
 
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" class="py-0">
         <v-text-field
         density="compact"
                     variant="outlined"
@@ -140,7 +140,7 @@ const onFormSubmit = () => {
         </v-text-field>
       </v-col>
 
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" class="py-0">
         <v-text-field
         density="compact"
                     variant="outlined"
