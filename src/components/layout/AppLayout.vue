@@ -38,35 +38,11 @@ onMounted(() => {
 
 <template>
   <v-responsive>
-    <v-app :theme="theme">
-      <v-app-bar
-        class="px-3"
-        :color="theme === 'light' ? 'brown-lighten-3' : 'brown-darken-2'"
-        border
-      >
-      <v-app-bar-nav-icon
-          v-if="props.isWithAppBarNavIcon"
-          icon="mdi-menu"
-          :theme="theme"
-          @click="emit('isDrawerVisible')"
-        >
-        </v-app-bar-nav-icon>
-
-        <!-- <v-app-bar-title>
-          <v-img src="/images/pawtrack-logo.png" :width="xs ? '100%' : sm ? '40%' : '9%'"></v-img>
-        </v-app-bar-title> -->
-
-        <v-spacer></v-spacer>
-
-        <v-btn
-        class="me-2"
-          :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
-          variant="elevated"
-          slim
-          @click="onToggleTheme"
-        ></v-btn>
-
-        <ProfileHeaderNavigation></ProfileHeaderNavigation>
+    <v-app>
+      <v-app-bar dark>
+          <v-col class="text-end bg-color-grn opacity-80">
+            <ProfileHeaderNavigation v-if="isLoggedIn"></ProfileHeaderNavigation>
+          </v-col>
       </v-app-bar>
 
       <slot name="navigation"></slot>

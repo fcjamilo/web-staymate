@@ -64,8 +64,8 @@ onMounted(() => {
   <v-menu min-width="150px" rounded>
     <template #activator="{ props }">
       <v-btn icon v-bind="props">
-        <v-avatar color="deep-orange-lighten-1" size="large">
-            <span class="text-h5">{{ userData.initials }} </span>
+        <v-avatar color="grey-lighten-2" size="large">
+            <span class="text-h5 bg-color3">{{ userData.initials }} </span>
         </v-avatar>
       </v-btn>
     </template>
@@ -74,8 +74,9 @@ onMounted(() => {
       <v-card-text>
         <v-list>
           <v-list-item :subtitle="userData.email" :title="userData.fullname">
-            <v-avatar color="deep-orange-lighten-1" size="large">
-                <span class="text-h5">{{ userData.initials }}</span>
+            <v-divider class="mt-2 pb-2 border-opacity-0"></v-divider>
+            <v-avatar color="grey-lighten-1" size="large">
+                <span class="text-h5 bg-color3">{{ userData.initials }}</span>
             </v-avatar>
           </v-list-item>
         </v-list>
