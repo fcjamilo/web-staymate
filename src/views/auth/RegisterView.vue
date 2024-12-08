@@ -92,6 +92,7 @@ const onFormSubmit = () => {
                     <v-row dense>
       <v-col cols="12" md="6" class="pb-0 pt-3">
         <v-text-field
+        prepend-inner-icon="mdi-account-details-outline"
         density="compact"
                     variant="outlined"
                     style="font-size: 1.25rem;"
@@ -103,6 +104,7 @@ const onFormSubmit = () => {
 
       <v-col cols="12" md="6" class="pb-0 pt-3">
         <v-text-field
+        prepend-inner-icon="mdi-account-details-outline"
         density="compact"
                     variant="outlined"
                     style="font-size: 1.25rem;"
