@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from '@/views/auth/RegisterView.vue'
-import HomeView from '@/views/auth/HomeView.vue'
 import DashboardView from '@/views/system/DashboardView.vue'
+import { isAuthenticated } from '@/utils/supabase'
+import NotFoundView from '@/views/errors/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,7 +11,6 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
     },
     {
       path: '/login',
@@ -26,8 +26,30 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView
+    },
+    { 
+      path: '/:pathMatch(.*)*', 
+      name: 'NotFound', 
+      component: NotFoundView 
     }
   ],
 })
 
+router.beforeEach( async(to) => {
+  const isLoggedIn = await isAuthenticated()
+
+  if(to.name === 'home') {
+    return isLoggedIn ? { name: 'dashboard'} : { name: 'login' }
+  }
+
+  if (isLoggedIn && (to.name === 'login' || to.name === 'register')) {
+    return { name: 'dashboard'}
+  }
+
+  if (!isLoggedIn && to.name === 'dashboard') {
+    return { name: 'login' }
+  }
+
+
+})
 export default router
