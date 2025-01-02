@@ -1,5 +1,14 @@
 <template>
-  <v-container>
+    <v-container>
+    <v-row>
+      <v-col>
+        <v-card class="pa-4 opacity-80" elevation="2" color="#3a7871">
+          <v-card-title class="text-h5 font-weight-bold text-center">
+            YOUR FAVORITES
+          </v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col v-for="house in boardingHouses" :key="house.id" cols="12" sm="6" md="4">
         <v-card>
@@ -9,6 +18,7 @@
           <v-img :src="house.img || '/room_sample.jpg'" class="ma-2"></v-img>
           <v-card-text>
             Location: {{ house.purok }} <br>
+            Contact Number: {{ house.contact_number }} <br>
             Description: {{ house.description }}
           </v-card-text>
         </v-card>

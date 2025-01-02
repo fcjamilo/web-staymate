@@ -208,7 +208,7 @@ onMounted(() => {
         </v-col>
         <v-col cols="12" md="4">
           <v-card
-            prepend-avatar="/francineprof.jpg"
+            prepend-avatar="/myprof.jpg"
             subtitle="Lead Developer"
             title="Francine Claire Jamilo"
           >
