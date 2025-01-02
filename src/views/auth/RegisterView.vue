@@ -109,7 +109,7 @@ const onFormSubmit = () => {
                           density="compact"
                           variant="outlined"
                           style="font-size: 1.25rem"
-                          label="Firstname"
+                          label="First Name"
                           v-model="formData.firstname"
                           :rules="[requiredValidator]"
                         ></v-text-field>
@@ -121,7 +121,7 @@ const onFormSubmit = () => {
                           density="compact"
                           variant="outlined"
                           style="font-size: 1.25rem"
-                          label="Lastname"
+                          label="Last Name"
                           v-model="formData.lastname"
                           :rules="[requiredValidator]"
                         ></v-text-field>

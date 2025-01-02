@@ -85,7 +85,7 @@ onMounted(() => {
 
         <v-divider class="my-3"></v-divider>
 
-        <v-btn prepend-icon="mdi-heart" variant="plain" to="/favorites">
+        <v-btn prepend-icon="mdi-star" variant="plain" to="/favorites">
           Favorites
         </v-btn>
 
