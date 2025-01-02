@@ -6,6 +6,7 @@ import AppLayout from '@/components/layout/AppLayout.vue'
 const boardingHouses = ref([]) // Store the boarding houses
 const dialog = ref(false)
 const selectedHouse = ref(null) // Store the selected house
+const houseRooms = ref([]) // Store the room types for the selected house
 
 // Fetch boarding houses from Supabase
 const fetchBoardingHouses = async () => {
@@ -53,9 +54,26 @@ const fetchRooms = async () => {
 }
 
 // Open the dialog with the selected boarding house
-const openDialog = (house) => {
+const openDialog = async (house) => {
   selectedHouse.value = house
   dialog.value = true
+
+// Fetch room types associated with the selected boarding house
+try {
+    const { data, error } = await supabase
+      .from('room_types') // Assuming room_types table has a foreign key to 'boarding_houses'
+      .select('*')
+      .eq('boarding_house_id', house.id) // Use the selected boarding house ID
+
+    if (error) {
+      console.error('Error fetching room types:', error)
+    } else {
+      // Assign the fetched room types to houseRooms
+      houseRooms.value = data
+    }
+  } catch (error) {
+    console.error('Unexpected error fetching room types:', error)
+  }
 }
 
 // Add to favorites function
@@ -103,7 +121,7 @@ onMounted(() => {
         <v-col cols="12" sm="6" xs="4" class="d-flex align-center justify-center">
           <div class="content">
             <h1 class="text-center"><strong>BE OUR STAYMATE!</strong></h1>
-            <p class="text-justify px-5">
+            <p class="text-justify px-5 poppins-light">
               Your ideal living space is just a few clicks away with StayMate—Make your stay truly comfortable and enjoyable!
             </p>
           </div>
@@ -133,12 +151,12 @@ onMounted(() => {
       <br>
         <v-row>
           <!-- Loop through each boarding house -->
-          <v-col v-for="house in boardingHouses" :key="house.id" cols="12" md="4" class="elevation-2 ga-5">
+          <v-col v-for="house in boardingHouses" :key="house.id" cols="12" md="4" class="elevation-2">
             <v-card class="mx-3 elevation-0">
               <v-img class="ma-4" :src="house.img"></v-img>
-              <v-card-title>{{ house.name }}</v-card-title>
-              <v-card-subtitle>Location: {{ house.purok }}<br>Contact: {{ house.contact_number }}</v-card-subtitle>
-              <v-card-text>{{ house.description }}</v-card-text>
+              <v-card-title class="anton-regular">{{ house.name }}</v-card-title>
+              <v-card-subtitle class="poppins-light">Location: {{ house.purok }}<br>Contact Number: {{ house.contact_number }}</v-card-subtitle>
+              <v-card-text class="poppins-light">{{ house.description }}</v-card-text>
 
               <!-- Loop through each room in the boarding house and show its image -->
               <v-row>
@@ -167,19 +185,35 @@ onMounted(() => {
 
         <!-- Dialog for more details about the selected boarding house -->
         <v-dialog v-model="dialog" max-width="500px" persistent transition="dialog-top-transition">
-          <v-card>
-            <v-card-title class="headline">{{ selectedHouse?.name }}</v-card-title>
-            <v-card-subtitle
-              >{{ selectedHouse?.purok }} & {{ selectedHouse?.contact_number }}</v-card-subtitle
-            >
-            <v-img :width="371" class="ma-4" :src="selectedHouse?.img || '/bh_sample.jpg'"></v-img>
-            <v-card-text>{{ selectedHouse?.description }}</v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green darken-1" text @click="dialog = false">Close</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+  <v-card>
+    <v-card-title class="headline anton-regular pt-5">{{ selectedHouse?.name }}</v-card-title>
+    <v-card-subtitle class="poppins-light">
+      Location: {{ selectedHouse?.purok }} <br>
+      Contact Number: {{ selectedHouse?.contact_number }}
+    </v-card-subtitle>
+    <v-img :width="371" class="ma-4" :src="selectedHouse?.img || '/bh_sample.jpg'"></v-img>
+
+    <!-- Display room types here -->
+     <v-divider></v-divider>
+     <br>
+    <v-card-title class="text-center my-0 anton-regular">ADDITIONAL DETAILS</v-card-title>
+    <v-row class=" text-center">
+      <v-col v-for="room in houseRooms" :key="room.id">
+          <v-img :src="room.img || '/room_sample.jpg'" class="ma-2"></v-img>
+          <v-card-text class="poppins-light">{{ selectedHouse?.description }}</v-card-text>
+          <v-chip class="mx-2">Vacancy: {{ room.room_vacancy }}</v-chip>
+          <v-chip class="mx-2">Capacity: {{ room.room_capacity }}</v-chip>
+          <v-chip class="mx-2 my-3">Rate: ₱{{ room.room_rate }}</v-chip>
+      </v-col>
+    </v-row>
+
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="#dc4e1d" text @click="dialog = false">Close</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+
       </v-container>
       <v-container class="my-5"> 
       <v-row>
@@ -191,6 +225,7 @@ onMounted(() => {
             prepend-avatar="/background.png"
             subtitle="System Analyst"
             title="Jherto Lagdamen"
+            class="poppins-light"
           >
             <v-divider></v-divider>
             <div class="d-flex">
@@ -211,6 +246,7 @@ onMounted(() => {
             prepend-avatar="/myprof.jpg"
             subtitle="Lead Developer"
             title="Francine Claire Jamilo"
+            class="poppins-light"
           >
             <v-divider></v-divider>
             <div class="d-flex">
@@ -252,6 +288,7 @@ onMounted(() => {
             prepend-avatar="/background.png"
             subtitle="Frontend Developer"
             title="Eloisa Vasquez"
+            class="poppins-light"
           >
             <v-divider></v-divider>
             <div class="d-flex">
