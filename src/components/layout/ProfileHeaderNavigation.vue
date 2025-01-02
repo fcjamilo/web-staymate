@@ -9,9 +9,9 @@ import { useAuthUserStore } from '@/stores/authUser'
 const router = useRouter()
 
 const userData = ref({
-    initials: '',
-    email:'',
-    fullname: ''
+  initials: '',
+  email: '',
+  fullname: '',
 })
 
 // Use Pinia Store
@@ -19,7 +19,7 @@ const authStore = useAuthUserStore()
 
 // Load Variables
 const formAction = ref({
-  ...formActionDefault
+  ...formActionDefault,
 })
 
 // Logout Functionality
@@ -39,24 +39,26 @@ const onLogout = async () => {
   setTimeout(() => {
     authStore.$reset()
   }, 2500)
+  localStorage.removeItem('user_id')
+
   // Redirect to homepage
   router.replace('/login')
 }
 
 const getUser = async () => {
-    const {
-        data: {
-            user: { user_metadata: metadata }
-        }
-    } = await supabase.auth.getUser()
+  const {
+    data: {
+      user: { user_metadata: metadata },
+    },
+  } = await supabase.auth.getUser()
 
-    userData.value.email = metadata.email
-    userData.value.fullname = metadata.firstname + ' ' + metadata.lastname
-    userData.value.initials = getAvatarText(userData.value.fullname)
+  userData.value.email = metadata.email
+  userData.value.fullname = metadata.firstname + ' ' + metadata.lastname
+  userData.value.initials = getAvatarText(userData.value.fullname)
 }
 
 onMounted(() => {
-    getUser()
+  getUser()
 })
 </script>
 
@@ -65,7 +67,7 @@ onMounted(() => {
     <template #activator="{ props }">
       <v-btn icon v-bind="props">
         <v-avatar color="grey-lighten-2" size="large">
-            <span class="text-h5 bg-color3">{{ userData.initials }} </span>
+          <span class="text-h5 bg-color3">{{ userData.initials }} </span>
         </v-avatar>
       </v-btn>
     </template>
@@ -76,15 +78,15 @@ onMounted(() => {
           <v-list-item :subtitle="userData.email" :title="userData.fullname">
             <v-divider class="mt-2 pb-2 border-opacity-0"></v-divider>
             <v-avatar color="grey-lighten-1" size="large">
-                <span class="text-h5 bg-color3">{{ userData.initials }}</span>
+              <span class="text-h5 bg-color3">{{ userData.initials }}</span>
             </v-avatar>
           </v-list-item>
         </v-list>
 
         <v-divider class="my-3"></v-divider>
 
-        <v-btn prepend-icon="mdi-wrench" variant="plain" to="/account/settings">
-          Account Settings
+        <v-btn prepend-icon="mdi-heart" variant="plain" to="/favorites">
+          Favorites
         </v-btn>
 
         <v-divider class="my-3"></v-divider>

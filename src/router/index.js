@@ -4,6 +4,7 @@ import RegisterView from '@/views/auth/RegisterView.vue'
 import DashboardView from '@/views/system/DashboardView.vue'
 import { isAuthenticated } from '@/utils/supabase'
 import NotFoundView from '@/views/errors/NotFoundView.vue'
+import Favorites from '@/views/system/Favorites.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,41 +16,44 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginView
+      component: LoginView,
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterView
+      component: RegisterView,
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: DashboardView
+      component: DashboardView,
     },
-    { 
-      path: '/:pathMatch(.*)*', 
-      name: 'NotFound', 
-      component: NotFoundView 
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFoundView,
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: Favorites,
     }
   ],
 })
 
-router.beforeEach( async(to) => {
+router.beforeEach(async (to) => {
   const isLoggedIn = await isAuthenticated()
 
-  if(to.name === 'home') {
-    return isLoggedIn ? { name: 'dashboard'} : { name: 'login' }
+  if (to.name === 'home') {
+    return isLoggedIn ? { name: 'dashboard' } : { name: 'login' }
   }
 
   if (isLoggedIn && (to.name === 'login' || to.name === 'register')) {
-    return { name: 'dashboard'}
+    return { name: 'dashboard' }
   }
 
   if (!isLoggedIn && to.name === 'dashboard') {
     return { name: 'login' }
   }
-
-
 })
 export default router

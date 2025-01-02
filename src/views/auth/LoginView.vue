@@ -1,58 +1,62 @@
 <script setup>
-import AlertNotification from '@/components/common/AlertNotification.vue';
-import { formActionDefault, supabase } from '@/utils/supabase';
-import { requiredValidator, emailValidator } from '@/utils/validators';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import AlertNotification from '@/components/common/AlertNotification.vue'
+import { formActionDefault, supabase } from '@/utils/supabase'
+import { requiredValidator, emailValidator } from '@/utils/validators'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 // Utilize pre-defined vue functions
-const router = useRouter();
+const router = useRouter()
 
-const isPasswordVisible = ref(false);
-const refVForm = ref();
+const isPasswordVisible = ref(false)
+const refVForm = ref()
 
 const formDataDefault = {
   email: '',
-  password: ''
-};
+  password: '',
+}
 
 const formData = ref({
-  ...formDataDefault
-});
+  ...formDataDefault,
+})
 
 const formAction = ref({
-  ...formActionDefault
-});
+  ...formActionDefault,
+})
 
 const onSubmit = async () => {
   // Reset Form Action utils; Turn on processing at the same time
-  formAction.value = { ...formActionDefault, formProcess: true };
+  formAction.value = { ...formActionDefault, formProcess: true }
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email: formData.value.email,
-    password: formData.value.password
-  });
+    password: formData.value.password,
+  })
 
   if (error) {
     // Add Error Message and Status Code
-    formAction.value.formErrorMessage = error.message;
-    formAction.value.formStatus = error.status;
+    formAction.value.formErrorMessage = error.message
+    formAction.value.formStatus = error.status
   } else if (data) {
     // Add Success Message
-    formAction.value.formSuccessMessage = 'Successfully Logged In.';
+    formAction.value.formSuccessMessage = 'Successfully Logged In.'
+
+    // Save user.id in localStorage
+    localStorage.setItem('user_id', data.user.id)
+    console.log(data.user.id)
     // Redirect Acct to Dashboard
-    router.replace('/dashboard');
+    router.push('/dashboard')
   }
 
   // Turn off processing
-  formAction.value.formProcess = false;
-};
+  formAction.value.formProcess = false
+}
 
 const onFormSubmit = () => {
   refVForm.value?.validate().then(({ valid }) => {
-    if (valid) onSubmit();
-  });
-};
+    if (valid) onSubmit()
+  })
+}
 </script>
 
 <template>
@@ -62,7 +66,13 @@ const onFormSubmit = () => {
         <v-container class="mt-5">
           <v-row class="loginitems">
             <v-col cols="12" md="6">
-              <v-img src="/hello-unscreen.gif" alt="" contain max-height="550px" class="floating"></v-img>
+              <v-img
+                src="/hello-unscreen.gif"
+                alt=""
+                contain
+                max-height="550px"
+                class="floating"
+              ></v-img>
             </v-col>
             <v-col cols="12" md="4" class="form1 mx-auto">
               <v-card class="mx-auto text-center pt-5">
@@ -70,8 +80,8 @@ const onFormSubmit = () => {
                   <v-img src="/staymate.png" contain height="100" alt="App Logo"></v-img>
                 </template>
 
-                <AlertNotification 
-                  :form-success-message="formAction.formSuccessMessage" 
+                <AlertNotification
+                  :form-success-message="formAction.formSuccessMessage"
                   :form-error-message="formAction.formErrorMessage"
                 ></AlertNotification>
 
@@ -80,11 +90,11 @@ const onFormSubmit = () => {
                     <v-col>
                       <v-text-field
                         v-model="formData.email"
-                        prepend-inner-icon="mdi-email-outline" 
+                        prepend-inner-icon="mdi-email-outline"
                         density="compact"
-                        label="Email" 
+                        label="Email"
                         variant="outlined"
-                        style="font-size: 1.25rem;"
+                        style="font-size: 1.25rem"
                         :rules="[requiredValidator, emailValidator]"
                       ></v-text-field>
 
@@ -97,20 +107,23 @@ const onFormSubmit = () => {
                         density="compact"
                         label="Password"
                         variant="outlined"
-                        style="font-size: 1.25rem;"
+                        style="font-size: 1.25rem"
                         :rules="[requiredValidator]"
                       ></v-text-field>
 
                       <v-btn
-                        class="mt-2" 
-                        color="#dc4e1d" 
-                        rounded block type="submit" 
+                        class="mt-2"
+                        color="#dc4e1d"
+                        rounded
+                        block
+                        type="submit"
                         prepend-icon="mdi-login"
                         :disabled="formAction.formProcess"
                         :loading="formAction.formProcess"
-                      ><b>LOGIN</b></v-btn>
+                        ><b>LOGIN</b></v-btn
+                      >
                     </v-col>
-                  
+
                     <v-divider class="my-5"></v-divider>
                     <h5>
                       Don't have an account?
@@ -132,6 +145,6 @@ const onFormSubmit = () => {
   </v-responsive>
 </template>
 
-<script> 
-export default { name: 'LoginView' }; 
+<script>
+export default { name: 'LoginView' }
 </script>
